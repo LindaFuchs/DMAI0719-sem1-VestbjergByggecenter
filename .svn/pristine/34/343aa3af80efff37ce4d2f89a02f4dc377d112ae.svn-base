@@ -1,0 +1,12 @@
+package modellayer;
+
+import java.util.Calendar;
+
+public class Customer extends Person
+{
+	private Account account;
+	private int customerID;
+	private String company;
+	private Calendar membership;
+	private double discount;
+}

@@ -1,0 +1,32 @@
+package controllayer;
+
+import java.util.ArrayList;
+
+import modellayer.*;
+
+public class ItemCtr
+{
+	private Inventory inv;
+	
+	public ItemCtr() {
+		inv = Inventory.getInstance();
+	}
+
+	public boolean createSaleItem(String barcode, String name, String category, String description, double price, int quantity, String serialNumber, String location) {
+		SaleItem si = new SaleItem(barcode, name, category, description, price, quantity, serialNumber, location);
+		return inv.insertSaleItem(si);
+	}
+
+	public ArrayList<Item> searchSaleItemBarcodes(String inputBarcode){
+		return inv.searchSaleItemBarcode(inputBarcode);
+	}
+	
+	public ArrayList<Item> searchLoanItemBarcodes(String inputBarcode){
+		return inv.searchLoanItemBarcode(inputBarcode);
+	}
+
+
+
+
+
+}

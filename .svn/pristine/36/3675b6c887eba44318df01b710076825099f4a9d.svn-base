@@ -1,0 +1,10 @@
+package modellayer;
+
+import java.util.ArrayList;
+
+public class SaleContainer
+{
+	private ArrayList<Sale> sales;
+	private SaleContainer instance;
+	
+}

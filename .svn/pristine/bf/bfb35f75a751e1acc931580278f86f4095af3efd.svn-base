@@ -1,0 +1,8 @@
+package uilayer;
+
+import controllayer.PersonCtr;
+
+public class ContractorUI
+{
+	private PersonCtr personC;
+}

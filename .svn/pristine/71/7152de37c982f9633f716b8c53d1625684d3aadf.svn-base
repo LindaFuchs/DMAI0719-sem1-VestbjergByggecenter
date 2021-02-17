@@ -1,0 +1,9 @@
+package modellayer;
+
+public class Payment
+{
+	private String method;
+	private boolean authenticated;
+	private double amount;
+	private double totalDiscount;
+}

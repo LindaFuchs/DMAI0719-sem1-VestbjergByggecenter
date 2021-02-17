@@ -1,0 +1,11 @@
+package modellayer;
+
+import java.util.Calendar;
+
+public class Account
+{
+	private double amount;
+	private int numberOfPurchases;
+	private Calendar dueDate;
+	
+}

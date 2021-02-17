@@ -1,0 +1,12 @@
+package modellayer;
+
+import java.util.Calendar;
+
+public class Sale
+{
+	private Payment payment;
+	private Calendar date;
+	private double totalPrice;
+	private int numberOfItems;
+	private boolean invoice;
+}

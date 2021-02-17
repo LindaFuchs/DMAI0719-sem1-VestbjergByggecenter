@@ -1,0 +1,66 @@
+package uilayer;
+
+import java.util.Scanner;
+
+public class MainUI {
+	
+	private ItemUI itemUI;
+	
+	public MainUI()
+	{
+		itemUI = new ItemUI();
+	}
+
+	public static void main(String[] agrs)
+	{
+		new MainUI().mainMenu();
+	}
+	
+	
+	public void mainMenu() {
+		int choice = printMainMenu();
+		boolean exit = false;
+		while(!exit) {
+			switch(choice) {
+			case 1:
+				System.out.println("Sale menu");
+				break;
+			case 2:
+				System.out.println("Customer menu");
+				break;
+			case 3:
+				System.out.println("Employee menu");
+				break;
+			case 4:
+				System.out.println("Contractor menu");
+				break;
+			case 5:
+				itemUI.itemMenu();
+				break;
+			default:
+				exit = true;
+				break;
+				
+			}
+		}
+	}
+	
+	public int printMainMenu() {
+		System.out.println("Main menu");
+		System.out.println("(1) Sale");
+		System.out.println("(2) Customer");
+		System.out.println("(3) Employee");
+		System.out.println("(4) Contractor");
+		System.out.println("(5) Item");
+		Scanner scanner = new Scanner(System.in);
+		int choice;
+		if(scanner.hasNextInt()) {
+			choice = scanner.nextInt();
+		}
+		else {
+			choice = 0;
+		}
+		return choice;
+	}
+	
+}

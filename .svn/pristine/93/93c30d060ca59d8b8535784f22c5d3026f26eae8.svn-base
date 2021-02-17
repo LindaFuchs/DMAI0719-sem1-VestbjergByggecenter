@@ -1,0 +1,11 @@
+package modellayer;
+
+import java.util.Calendar;
+
+public class Contractor extends Person
+{
+	private int contractorID;
+	private String company;
+	private Calendar membership;
+	
+}

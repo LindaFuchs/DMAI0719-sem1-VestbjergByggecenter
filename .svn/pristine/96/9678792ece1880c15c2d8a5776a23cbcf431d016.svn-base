@@ -1,0 +1,9 @@
+package uilayer;
+
+import controllayer.SaleCtr;
+
+public class SaleUI
+{
+	private SaleCtr saleC;
+	
+}

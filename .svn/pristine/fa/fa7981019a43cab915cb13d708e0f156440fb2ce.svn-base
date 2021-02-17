@@ -1,0 +1,314 @@
+package uilayer;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import controllayer.ItemCtr;
+import modellayer.Item;
+
+public class ItemUI
+{
+	private ItemCtr itemC;
+	
+	public void itemMenu() {
+		int choice = printItemMenu();
+		boolean exit = false;
+		while(!exit) {
+			switch(choice) {
+			case 1:
+				newItem();
+				break;
+			case 4: 
+				searchItems();
+				break;
+			default:
+				exit = true;
+				break;			
+			}
+		}
+	}
+	
+	public int printItemMenu() {
+		System.out.println("Item menu");
+		System.out.println("(1) New Item");
+		System.out.println("(2) Edit Item");
+		System.out.println("(3) Delete Item");
+		System.out.println("(4) Search Inventory");
+		System.out.println("(5) Items by category");
+		Scanner scanner = new Scanner(System.in);
+		int choice;
+		if(scanner.hasNextInt()) {
+			choice = scanner.nextInt();
+		}
+		else {
+			choice = 0;
+		}
+		return choice;
+	}
+	
+	public int newItem() {
+		int choice = printNewItemMenu();
+		boolean exit = false;
+		while(!exit) {
+			switch(choice) {
+			case 1: 
+				inputSaleItemInfo();
+				break;
+//			case 2:
+//				System.out.println("inputLoanItemInfo()");
+//				break;
+			default:
+				exit = true;
+				break;
+			}
+		}
+		return choice;
+	}
+	
+	public int printNewItemMenu() {
+		int choice;
+		System.out.println("New Item Menu");
+		System.out.println("(1) New Sale Item");
+		System.out.println("(2) New Loan Item");
+		Scanner scanner = new Scanner(System.in);
+		if(scanner.hasNextInt()) {
+			choice = scanner.nextInt();
+		}
+		else {
+			choice = 0;
+		}
+		
+		return choice;
+	}
+	
+	/*
+	 * MAIN INPUT TEST
+	 */
+	public boolean testInt(String input)
+	{  //Takes input string to check if it has any letters
+	    try
+	    {
+	        Integer.parseInt(input); //Parses the input
+	    }
+	    catch(NumberFormatException nf) //If parsed input has a letter it returns this exception
+	    {
+	        return false; //For boolean check
+	    }
+	    return true; //For boolean check
+	}
+	
+	public boolean inputSaleItemInfo() {
+		String barcode = null;
+		String name = null; 
+		String category = null;
+		String description = null;
+		String serialNumber = null;
+		String location = null;
+		double price = 0;
+		int quantity = 0;
+		
+		
+		boolean created = false;
+		boolean running = true;
+		Scanner scanner = new Scanner(System.in);
+		Scanner intScanner = new Scanner(System.in);
+		while(true)
+		{
+		   while(true) {
+		       System.out.println("Enter barcode: ");
+		       barcode = intScanner.nextLine();
+		       if(!testInt(barcode)) { //sends input String to testInt
+		           System.out.println("Barcode must be a number."); //if the test is false, error message
+		       }
+		       else {
+		           break; //if test is true, continues running to next input
+		       }
+		   }
+		   
+		   //TO-DO: replicate above method for all inputs
+		System.out.println("Enter name: ");
+		if(scanner.hasNext()) {
+			name = scanner.next();
+		}
+		else {
+			System.out.println("Item must have name.");
+			inputSaleItemInfo(); // TO CHANGE - so it doesn't start from beginning
+		}
+		
+		System.out.println("Enter category: ");
+		if(scanner.hasNext()) {
+			category = scanner.next();
+		}
+		else {
+			System.out.println("Item must have category.");
+			inputSaleItemInfo();
+		}
+		
+		System.out.println("Enter description: ");
+		if(scanner.hasNext()) {
+			description = scanner.next();
+		}
+		else {
+			System.out.println("Item must have description.");
+			inputSaleItemInfo();
+		}
+		
+		System.out.println("Enter price: ");
+		if(scanner.hasNextDouble()) {
+			price = scanner.nextDouble();
+		}
+		else {
+			System.out.println("Price must be number.");
+			inputSaleItemInfo();
+		}
+		
+		System.out.println("Enter quantity: ");
+		if(scanner.hasNextInt()) {
+			quantity = scanner.nextInt();
+		}
+		else {
+			System.out.println("Quantity must be number.");
+			inputSaleItemInfo();
+		}
+		
+		System.out.println("Enter serial number: "); // TO CHANGE - automatic generator
+		if(scanner.hasNextInt()) {
+			serialNumber = scanner.next();
+		}
+		else {
+			System.out.println("Serial number must be number.");
+			inputSaleItemInfo();
+		}
+		
+		System.out.println("Enter location: ");
+		if(scanner.hasNext()) {
+			location = scanner.next();
+		}
+		else {
+			System.out.println("Item must have location.");
+			inputSaleItemInfo();
+		}
+		
+		boolean answer;
+		System.out.println("New Item: " + " | " + barcode + " | " + name);
+		System.out.println("Confirm? Y/N");
+		while(true) {
+			String yn = scanner.next().trim().toLowerCase();
+			if(yn.equals("y")) {
+				answer = true;
+				break;
+			}
+			else if(yn.equals("n")) {
+				answer = false;
+				break;
+			}
+			else {
+				System.out.println("Invalid input.");
+			}
+		}
+		if(answer) {
+			itemC = new ItemCtr();
+			itemC.createSaleItem(barcode, name,category, description, price, quantity, serialNumber, location);
+			System.out.println(name + " was added to inventory."); 
+			created = true;
+		}
+		itemMenu();
+		return created;
+		}
+	}
+
+	public int searchItems() {
+		int choice = printSearchItemMenu();
+		boolean exit = false;
+		while(!exit) {
+			switch(choice) {
+			case 1: 
+				searchSaleItem();
+				break;
+			case 2:
+				System.out.println("searchLoanItem()"); // TO CHANGE
+			default:
+				exit = true;
+				break;
+			}
+		}
+		return choice;
+	}
+	
+	public int printSearchItemMenu() {
+		int choice;
+		System.out.println("Search Item Menu");
+		System.out.println("(1) Search Sale Items");
+		System.out.println("(2) Search Loan Items");
+		Scanner scanner = new Scanner(System.in);
+		if(scanner.hasNextInt()) {
+			choice = scanner.nextInt();
+		}
+		else {
+			choice = 0;
+		}
+		
+		return choice;
+	}
+	
+	public int searchSaleItem() {
+		int choice;
+		System.out.println("Search Sale Item Menu");
+		System.out.println("(1) Search by barcode");
+		System.out.println("(2) Search by name");
+		System.out.println("(3) Search by description");
+		System.out.println("(4) Search by category");
+		Scanner scanner = new Scanner(System.in);
+		if(scanner.hasNextInt()) {
+			choice = scanner.nextInt();
+		}
+		else {
+			choice = 0;
+		}
+		boolean exit = false;
+		while(!exit) {
+			switch(choice) {
+			case 1:
+				searchSaleItemBarcode();
+				break;
+			default:
+				exit = true;
+				break;
+			}
+		}
+		
+		return choice;
+	}
+	
+	private boolean searchSaleItemBarcode() {
+		boolean found = false;
+		String inputBarcode = null;
+		System.out.println("Input barcode: ");
+		Scanner scanner = new Scanner(System.in);
+		Scanner intScanner = new Scanner(System.in);
+        inputBarcode = intScanner .nextLine();
+		if(itemC.searchSaleItemBarcodes(inputBarcode)!= null) {
+			for(Item i : itemC.searchSaleItemBarcodes(inputBarcode)) {
+				System.out.println("Barcode: " + i.getBarcode());
+				System.out.println("Name: " + i.getName());
+				System.out.println("Category: " + i.getCategory());
+				System.out.println("Description: " + i.getDescription());
+				System.out.println("Price: " + i.getPrice());
+				System.out.println("Quantity: " + i.getQuantity());
+				System.out.println();
+			}
+			found = true;
+		}
+		else {
+			System.out.println("Item not found.");
+		}
+		
+		itemMenu();	
+		
+		return found;//change
+	}
+	
+	
+	
+	
+}

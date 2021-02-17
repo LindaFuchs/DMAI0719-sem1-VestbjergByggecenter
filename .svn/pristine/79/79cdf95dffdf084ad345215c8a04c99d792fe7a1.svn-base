@@ -1,0 +1,14 @@
+package modellayer;
+
+import java.util.Calendar;
+
+public class Employee extends Person
+{
+	private Account account;
+	private int EmployeeID;
+	private boolean managerAccess;
+	private double salery;
+	private Calendar hiredDate;
+	private double discount;
+	
+}

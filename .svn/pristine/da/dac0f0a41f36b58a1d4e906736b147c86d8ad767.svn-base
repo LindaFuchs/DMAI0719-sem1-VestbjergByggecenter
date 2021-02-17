@@ -1,0 +1,9 @@
+package modellayer;
+
+import java.util.ArrayList;
+
+public class PersonContainer
+{
+	private ArrayList<Person> persons;
+	private PersonContainer instance;
+}

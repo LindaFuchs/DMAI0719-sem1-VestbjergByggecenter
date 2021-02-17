@@ -1,0 +1,8 @@
+package controllayer;
+
+import modellayer.PersonContainer;
+
+public class PersonCtr
+{
+	private PersonContainer personCon;
+}

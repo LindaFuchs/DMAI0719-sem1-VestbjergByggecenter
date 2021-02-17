@@ -1,0 +1,45 @@
+package modellayer;
+
+import java.util.ArrayList;
+
+public class SaleContainer
+{
+	private ArrayList<Sale> sales;
+	private static SaleContainer instance;
+	private Sale sale;
+	
+	private SaleContainer() {
+        sales = new ArrayList<>();
+    }
+    
+    public static SaleContainer getInstance() {
+        if(instance == null) {
+            instance = new SaleContainer();
+        }
+        return instance;
+    }
+	
+    public boolean insertSale(Sale sale)
+    {
+        boolean result = false;
+        if(sale != null) {
+            result = sales.add(sale);
+        }
+        return result;
+    }
+    
+    public boolean setInvoice(boolean invoice) {
+        sale.setInvoice(invoice);
+        return true;
+    }
+    
+    public boolean addItem(Item itemToAdd)
+    {
+        boolean added = false;
+        if(itemToAdd != null)
+        {
+            added = sale.insertItem(itemToAdd);
+        }
+        return added;
+    }
+}

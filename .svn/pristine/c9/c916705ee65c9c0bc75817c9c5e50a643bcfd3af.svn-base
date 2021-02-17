@@ -1,0 +1,11 @@
+package controllayer;
+
+import modellayer.PersonContainer;
+import modellayer.SaleContainer;
+
+public class SaleCtr
+{
+	private SaleContainer saleCon;
+	private PersonContainer personCon;
+	
+}

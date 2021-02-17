@@ -1,0 +1,37 @@
+package controllayer;
+
+import java.util.ArrayList;
+
+import modellayer.*;
+
+public class SaleCtr
+{
+    private static SaleContainer saleCon;
+    private static PersonContainer personCon;
+    private Inventory inv;
+    
+    public SaleCtr() {
+        saleCon = SaleContainer.getInstance();
+        personCon = PersonContainer.getInstance();
+    }
+    
+    public boolean createSale(boolean invoice) {
+        Sale sale = new Sale(invoice);
+        return saleCon.insertSale(sale);
+    }
+    
+    public boolean setInvoice(boolean invoice) {
+        return saleCon.setInvoice(invoice);
+    }
+    
+    public boolean addItem(String inputBarcode)
+    {
+        boolean found = false;
+        SaleItem itemToAdd = inv.toAddSaleItemBarcode(inputBarcode);
+        if(itemToAdd != null) {
+            found = saleCon.addItem(itemToAdd);
+        }
+        
+        return found;
+    }
+}

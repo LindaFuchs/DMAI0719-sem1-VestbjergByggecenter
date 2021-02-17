@@ -1,0 +1,86 @@
+package modellayer;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Inventory
+{
+	private ArrayList<SaleItem> saleItems;
+	private ArrayList<LoanItem> loanItems;
+	//private HashMap<ArrayList<SaleItem>, ArrayList<LoanItem>> 
+	private static Inventory instance;
+	
+	private Inventory() {
+		saleItems = new ArrayList<>();
+		loanItems = new ArrayList<>();
+	}
+	
+	public static Inventory getInstance() {
+		if(instance == null) {
+			instance = new Inventory();
+		}
+		return instance;
+	}
+	
+	/*
+	public Map<ArrayList<SaleItem>, ArrayList<LoanItem>> searchBarcode(String inputBarcode){
+		ArrayList<SaleItem> foundSaleItems = new ArrayList<SaleItem>();
+		ArrayList<LoanItem> foundLoanItems = new ArrayList<LoanItem>();
+		Map<ArrayList<SaleItem>, ArrayList<LoanItem>> barcodeMap = new HashMap();
+		if(saleItems != null) {
+			for(SaleItem si : saleItems) {
+				if(si.getBarcode().equals(inputBarcode)) {
+					foundSaleItems.add(si);
+				}
+			}
+		}
+		else if(loanItems != null) {
+			for(LoanItem li : loanItems) {
+				if(li.getBarcode().equals(inputBarcode)) {
+					foundLoanItems.add(li);
+				}
+			}
+		}
+		barcodeMap.put(saleItems,foundSaleItems);
+	}
+	*/
+	
+	public boolean insertSaleItem(SaleItem saleItem) { //what if it is added twice?
+		boolean result = false;
+		if(saleItem != null) {
+			result = saleItems.add(saleItem);
+		}
+		return result;
+	}
+	
+	public ArrayList<Item> searchSaleItemBarcode(String inputBarcode){
+		ArrayList<Item> foundSaleItems = new ArrayList<>();
+		if(saleItems != null) {
+			for(Item i : saleItems) {
+				if(i.getBarcode().equals(inputBarcode)) {
+					foundSaleItems.add(i);
+				}
+			}
+		}
+		return foundSaleItems;
+	}
+	
+	public ArrayList<Item> searchLoanItemBarcode(String inputBarcode){
+		ArrayList<Item> foundLoanItems = new ArrayList<>();
+		if(loanItems != null) {
+			for(Item li : saleItems) {
+				if(li.getBarcode().equals(inputBarcode)) {
+					foundLoanItems.add(li);
+				}
+			}
+		}
+		return foundLoanItems;
+	}
+	
+	
+	
+	
+	
+	
+}
